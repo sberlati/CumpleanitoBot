@@ -29,7 +29,7 @@ client.on('message', function(message) {
                     });
                     fs.writeFile('cumples.json', JSON.stringify(cumplesCache), function(error) {
                         if(error) throw error;
-                        respuesta = '\n🚫 Error. No se pudo cargar el cumple.';
+                        respuesta = '\nCumplañito de ' + nombre + ' agregado!';
                     });
                 }else{
                     respuesta = `\n🚫 Formato incorrecto. \n\n**Usar** "cumpleanitobot, [nombre] [fecha dd/mm/YYYY]". **No acepta espacios en el nombre.**`;

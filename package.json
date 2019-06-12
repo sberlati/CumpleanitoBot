@@ -1,0 +1,23 @@
+{
+  "name": "cumpleanitobot",
+  "version": "1.0.0",
+  "description": "Bot de Discord para manejar cumpleañitos.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sberlati/CumpleanitoBot.git"
+  },
+  "author": "Sebastián Berlati",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sberlati/CumpleanitoBot/issues"
+  },
+  "homepage": "https://github.com/sberlati/CumpleanitoBot#readme",
+  "dependencies": {
+    "bufferutil": "^4.0.1",
+    "discord.js": "^11.5.1"
+  }
+}

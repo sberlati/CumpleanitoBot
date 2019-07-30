@@ -5,7 +5,7 @@ module.exports = {
      * El nombrel JSON donde voy a almacenar
      * los cumpleañitos.
      */
-    cumpleanitosFilename: 'cumpleanitos.json',
+    cumpleanitosFilename: 'cumples.json',
 
     /**
      * Recibo un objeto JSON y lo agrego al array
@@ -16,15 +16,16 @@ module.exports = {
     appendObject: function(object) {
         return new Promise((resolve, reject) => {
             this.getFileContents().then((data) => {
-                data = data.push(object);
+                data.push(object);
                 fs.writeFile(
                     this.cumpleanitosFilename,
                     JSON.stringify(data),
                     (err) => {
-                        if(err)
+                        if(err) {
                             reject(err);
-                        else
+                        }else{
                             resolve(true);
+                        }
                     }
                 );
             });
@@ -38,10 +39,11 @@ module.exports = {
     getFileContents: function() {
         return new Promise((resolve, reject) => {
             fs.readFile(this.cumpleanitosFilename, (err, data) => {
-                if(err)
+                if(err) {
                     reject(err);
-                else
+                }else{
                     resolve(JSON.parse(data));
+                }
             });
         });
     }

@@ -1,5 +1,5 @@
 var jsonHandler = require('./json');
-
+var closestTo = require('date-fns/closest_to');
 module.exports = {
     showHelp: function(messageInstance) {
         let respuesta  = `\n🎊 ** SUCH BIRTHDAY MUCH HAPPINESS ** 🎊\n\n`;
@@ -15,7 +15,7 @@ module.exports = {
         if(typeof nombre !== "undefined" && typeof fecha !== "undefined") {
             jsonHandler.appendObject({
                 'nombre': nombre,
-                'fecha': Date.parse(fecha, 'd/m/Y')
+                'fecha': fecha
             }).then((res) => {
                 if(res === true) {
                     return messageInstance.channel.send('Cumpleañito de '+nombre+' agregado!');
@@ -31,5 +31,35 @@ module.exports = {
                 `
             );
         }
+    },
+
+    showProximo: function(messageInstance) {
+        jsonHandler.getFileContents().then((res) => {
+            let hoy     = new Date(),
+                elegido = null;
+
+            res.forEach(function(obj) {
+                if(elegido == null) 
+                    elegido = obj;
+                else{
+                    let dateElegidoSplit = elegido.fecha.split('/'),
+                        dateActualSplit  = obj.fecha.split('/');
+
+                    let dateElegido = new Date(hoy.getFullYear(), dateElegidoSplit[1]-1, dateElegidoSplit[0]),
+                        dateActual  = new Date(hoy.getFullYear(), dateActualSplit[1]-1, dateActualSplit[0]);
+
+                    if(dateActual >= hoy) {
+                        if(dateElegido > dateActual) {
+                            elegido = obj;
+                        }
+                    }
+                }
+            });
+
+            return messageInstance.channel.send(`
+            \n ${elegido.nombre} es la próxima personita especial en cumplir años! **Cumple el ${elegido.fecha}**.
+            \n Dildos ya tiene demasiados, no regalar uno nuevo.
+            `);
+        });
     }
 };

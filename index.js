@@ -1,7 +1,7 @@
-var discord = require('discord.js');
-var config = require('./config');
-var client = new discord.Client();
+var discord         = require('discord.js');
+var config          = require('./config');
 var commandsHandler = require('./commands');
+var client          = new discord.Client();
 
 client.on('ready', function() {
     client.user.setActivity("la ruleta rusa");
@@ -16,7 +16,7 @@ client.on('message', async function(message) {
             break;
 
             case 'proximo':
-
+                commandsHandler.showProximo(message);
             break;
 
             case 'todos':
@@ -30,6 +30,5 @@ client.on('message', async function(message) {
         }
     }
 });
-
 
 client.login(config.token);

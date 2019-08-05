@@ -19,6 +19,7 @@
   "homepage": "https://github.com/sberlati/CumpleanitoBot#readme",
   "dependencies": {
     "bufferutil": "^4.0.1",
-    "discord.js": "^11.5.1"
+    "discord.js": "^11.5.1",
+    "express": "^4.17.1"
   }
 }

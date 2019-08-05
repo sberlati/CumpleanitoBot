@@ -1,6 +1,8 @@
 var discord         = require('discord.js');
 var commandsHandler = require('./commands');
 var client          = new discord.Client();
+var express         = require('express');
+var app             = express();
 
 var masterDiscriminator = process.env.masterDiscriminator;
 
@@ -39,3 +41,6 @@ client.on('message', async function(message) {
 });
 
 client.login(process.env.discordToken);
+
+app.get('/', (req, res) => {res.json({"wow":true});});
+app.listen(process.env.PORT || 5050, () => {console.log("Iniciado WS")});

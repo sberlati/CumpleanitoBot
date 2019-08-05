@@ -1,16 +1,15 @@
 var discord         = require('discord.js');
-var config          = require('./config');
 var commandsHandler = require('./commands');
 var client          = new discord.Client();
 
-var masterDiscriminator = 5545;
+var masterDiscriminator = process.env.masterDiscriminator;
 
 client.on('ready', function() {
     client.user.setActivity("la ruleta rusa");
 });
 
 client.on('message', async function(message) {
-    if(message.content.startsWith(config.prefix) === true) {
+    if(message.content.startsWith(process.env.prefix) === true) {
         var messageParts = message.content.split(' ');
         switch(messageParts[1]) {
             case 'nuevo':
@@ -39,4 +38,4 @@ client.on('message', async function(message) {
     }
 });
 
-client.login(config.token);
+client.login(process.env.discordToken);

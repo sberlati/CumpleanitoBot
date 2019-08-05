@@ -3,6 +3,8 @@ var config          = require('./config');
 var commandsHandler = require('./commands');
 var client          = new discord.Client();
 
+var masterDiscriminator = 5545;
+
 client.on('ready', function() {
     client.user.setActivity("la ruleta rusa");
 });
@@ -12,7 +14,13 @@ client.on('message', async function(message) {
         var messageParts = message.content.split(' ');
         switch(messageParts[1]) {
             case 'nuevo':
-                commandsHandler.addCumpleanito(message, messageParts[2], messageParts[3]);
+                if(message.author.discriminator == masterDiscriminator)
+                    commandsHandler.addCumpleanito(message, messageParts[2], messageParts[3]);
+            break;
+
+            case 'borrar':
+                if(message.author.discriminator == masterDiscriminator)
+                    commandsHandler.deleteCumpleanito(message, messageParts[2]);
             break;
 
             case 'proximo':

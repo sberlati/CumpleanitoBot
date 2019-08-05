@@ -32,6 +32,29 @@ module.exports = {
         });
     },
 
+    removeObjectByNombre: function(nombre) {
+        return new Promise((resolve, reject) => {
+            this.getFileContents().then((data) => {
+                var newData = data;
+                data.forEach((obj, i) => {
+                    if(obj.nombre == nombre) {
+                        newData.splice(i, 1);
+                    }
+                });
+                fs.writeFile(
+                    this.cumpleanitosFilename,
+                    JSON.stringify(newData),
+                    (err) => {
+                        if(err)
+                            reject(err);
+                        else
+                            resolve(true);
+                    }
+                );
+            });
+        });
+    },
+
     /**
      * Obtengo el contenido del archivo y lo parseo a
      * JSON.

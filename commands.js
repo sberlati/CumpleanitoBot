@@ -76,5 +76,11 @@ module.exports = {
             finalMessage += `\n\n👉 Si te parece que falta alguno, usa "cumpleanitobot, ayuda" para ver cómo agregar uno nuevo.`;
             return messageInstance.channel.send(finalMessage);
         });
+    },
+
+    deleteCumpleanito: function(messageInstance, nombre) {
+        jsonHandler.removeObjectByNombre(nombre).then(function(r) {
+            return messageInstance.channel.send('Eliminado con éxito!');
+        });
     }
 };

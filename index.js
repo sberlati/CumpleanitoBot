@@ -20,7 +20,7 @@ client.on('message', async function(message) {
             break;
 
             case 'todos':
-
+                commandsHandler.showAll(message);
             break;
 
             case 'ayuda':

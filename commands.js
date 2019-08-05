@@ -1,5 +1,5 @@
 var jsonHandler = require('./json');
-var closestTo = require('date-fns/closest_to');
+
 module.exports = {
     showHelp: function(messageInstance) {
         let respuesta  = `\n🎊 ** SUCH BIRTHDAY MUCH HAPPINESS ** 🎊\n\n`;
@@ -57,9 +57,24 @@ module.exports = {
             });
 
             return messageInstance.channel.send(`
-            \n ${elegido.nombre} es la próxima personita especial en cumplir años! **Cumple el ${elegido.fecha}**.
-            \n Dildos ya tiene demasiados, no regalar uno nuevo.
+            \n\n **!! ${elegido.nombre} !!** es la próxima personita especial en cumplir años! **Nació el ${elegido.fecha}**.
+            \n Dijo que ya tiene demasiados dildos.
             `);
+        });
+    },
+
+    showAll: function(messageInstance) {
+        jsonHandler.getFileContents().then((res) => {
+            let finalMessage = '🎊 CUMPLEAÑITOS 🎊\n';
+            if(res.length <= 0) {
+                finalMessage = `No encontré ninguno... Carga alguno chanta.`;
+            }else{
+                res.forEach(function(obj) {
+                    finalMessage += `\n **${obj.nombre}** cumple el ${obj.fecha}`;
+                });
+            }
+            finalMessage += `\n\n👉 Si te parece que falta alguno, usa "cumpleanitobot, ayuda" para ver cómo agregar uno nuevo.`;
+            return messageInstance.channel.send(finalMessage);
         });
     }
 };
